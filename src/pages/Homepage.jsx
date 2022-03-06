@@ -1,9 +1,12 @@
 import React from 'react'
+import DefaultLayout from '../components/DefaultLayout'
 
 const Homepage = () => {
   return (
     <div>
-      <h1>Homepage</h1>
+      <DefaultLayout>
+        <h1>Homepage</h1>
+      </DefaultLayout>
     </div>
   )
 }
