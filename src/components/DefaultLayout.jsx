@@ -10,12 +10,16 @@ import {
   LogoutOutlined,
   UserOutlined,
   UnorderedListOutlined,
+  ShoppingCartOutlined,
 } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const { Header, Sider, Content } = Layout
 
 const DefaultLayout = ({ children }) => {
+  const { cartItems } = useSelector(state => state.rootReducer)
+
   const [isCollapsed, setISCollapsed] = useState(false)
   const toggle = () => setISCollapsed(!isCollapsed)
   return (
@@ -55,6 +59,12 @@ const DefaultLayout = ({ children }) => {
               onClick: toggle,
             }
           )}
+          <div className='cart-count d-flex align-items-center'>
+            <ShoppingCartOutlined />
+            <b>
+              <p>{cartItems.length}</p>
+            </b>
+          </div>
         </Header>
         <Content
           className='site-layout-background'
