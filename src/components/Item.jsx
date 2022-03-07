@@ -1,8 +1,13 @@
 import { Button } from 'antd'
 import React from 'react'
 import { ShoppingCartOutlined } from '@ant-design/icons'
+import { useDispatch } from 'react-redux'
 
 const Item = ({ item }) => {
+  const dispatch = useDispatch()
+  const addToCart = () => {
+    dispatch({ type: 'addToCart', payload: item })
+  }
   return (
     <div className='item'>
       <h4 className='name'>{item.name}</h4>
@@ -11,7 +16,7 @@ const Item = ({ item }) => {
         Price: <b>{item.price}</b>$
       </h4>
       <div className='d-flex justify-content-end'>
-        <Button>
+        <Button onClick={() => addToCart()}>
           <ShoppingCartOutlined />
         </Button>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../assets/styles/layout.css'
 
 import { Layout, Menu } from 'antd'
@@ -19,6 +19,10 @@ const { Header, Sider, Content } = Layout
 
 const DefaultLayout = ({ children }) => {
   const { cartItems } = useSelector(state => state.rootReducer)
+
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems))
+  }, [cartItems])
 
   const [isCollapsed, setISCollapsed] = useState(false)
   const toggle = () => setISCollapsed(!isCollapsed)
