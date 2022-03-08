@@ -64,3 +64,11 @@
   padding-top: 7px;
   padding-bottom: 25px;
 }
+
+.cart-count {
+  cursor: pointer;
+}
+
+.ant-layout-content {
+  min-height: 86.5vh !important;
+}

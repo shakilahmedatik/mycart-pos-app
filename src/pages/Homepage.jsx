@@ -4,16 +4,26 @@ import axios from 'axios'
 import { Col, Row } from 'antd'
 import Item from '../components/Item'
 import '../assets/styles/items.css'
+import { useDispatch } from 'react-redux'
 
 const Homepage = () => {
+  const dispatch = useDispatch()
   const [items, setItems] = useState([])
   const getAllItems = () => {
+    dispatch({ type: 'showLoading' })
     axios
       .get('/api/items')
-      .then(response => setItems(response.data))
-      .catch(err => console.log(err))
+      .then(response => {
+        dispatch({ type: 'hideLoading' })
+        setItems(response.data)
+      })
+      .catch(err => {
+        dispatch({ type: 'hideLoading' })
+        console.log(err)
+      })
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => getAllItems(), [])
   return (
     <div>

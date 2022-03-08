@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../assets/styles/layout.css'
-
-import { Layout, Menu } from 'antd'
+import { Layout, Menu, Spin } from 'antd'
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -12,14 +11,14 @@ import {
   UnorderedListOutlined,
   ShoppingCartOutlined,
 } from '@ant-design/icons'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const { Header, Sider, Content } = Layout
 
 const DefaultLayout = ({ children }) => {
-  const { cartItems } = useSelector(state => state.rootReducer)
-
+  const { cartItems, loading } = useSelector(state => state.rootReducer)
+  const navigate = useNavigate()
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems))
   }, [cartItems])
@@ -83,7 +82,10 @@ const DefaultLayout = ({ children }) => {
               onClick: toggle,
             }
           )}
-          <div className='cart-count d-flex align-items-center'>
+          <div
+            onClick={() => navigate('/cart')}
+            className='cart-count d-flex align-items-center'
+          >
             <ShoppingCartOutlined />
             <b>
               <p>{cartItems.length}</p>
@@ -99,6 +101,11 @@ const DefaultLayout = ({ children }) => {
             borderRadius: '10px',
           }}
         >
+          {loading && (
+            <div className='d-flex h-100 justify-content-center align-items-center'>
+              <Spin size='large' />
+            </div>
+          )}
           {children}
         </Content>
       </Layout>

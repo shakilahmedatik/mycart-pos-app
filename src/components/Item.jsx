@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 const Item = ({ item }) => {
   const dispatch = useDispatch()
   const addToCart = () => {
-    dispatch({ type: 'addToCart', payload: item })
+    dispatch({ type: 'addToCart', payload: { ...item, quantity: 1 } })
   }
   return (
     <div className='item'>
