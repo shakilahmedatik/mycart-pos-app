@@ -106,7 +106,7 @@ const DefaultLayout = ({ children }) => {
               <Spin size='large' />
             </div>
           )}
-          {children}
+          {!loading && children}
         </Content>
       </Layout>
     </Layout>

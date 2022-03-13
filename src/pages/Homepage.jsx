@@ -12,7 +12,7 @@ const Homepage = () => {
   const getAllItems = () => {
     dispatch({ type: 'showLoading' })
     axios
-      .get('/api/items')
+      .get('/api/items/get-all-items')
       .then(response => {
         dispatch({ type: 'hideLoading' })
         setItems(response.data)

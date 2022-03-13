@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
-import { Table } from 'antd'
+import { Table, Button, Modal, Form, Input, Select, message } from 'antd'
 import DefaultLayout from '../components/DefaultLayout'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 
 const Items = () => {
+  const [addEditModalVisibility, setAddEditModalVisibility] = useState(false)
   const dispatch = useDispatch()
   const [items, setItems] = useState([])
   const getAllItems = () => {
     dispatch({ type: 'showLoading' })
     axios
-      .get('/api/items')
+      .get('/api/items/get-all-items')
       .then(response => {
         dispatch({ type: 'hideLoading' })
         setItems(response.data)
@@ -56,9 +57,65 @@ const Items = () => {
       ),
     },
   ]
+
+  const onFinish = values => {
+    dispatch({ type: 'showLoading' })
+    axios
+      .post('/api/items/add-items', values)
+      .then(response => {
+        dispatch({ type: 'hideLoading' })
+        console.log(response)
+        message.success(response.data)
+        getAllItems()
+      })
+      .catch(err => {
+        dispatch({ type: 'hideLoading' })
+        console.log(err)
+        message.error(err.message)
+      })
+  }
   return (
     <DefaultLayout>
-      <Table columns={columns} dataSource={items} bordered />
+      <div className='d-flex justify-content-between'>
+        <h3>Items</h3>
+        <Button
+          className='default-btn'
+          onClick={() => setAddEditModalVisibility(true)}
+        >
+          Add item
+        </Button>
+      </div>
+      <Table columns={columns} dataSource={items} rowKey='name' bordered />
+      <Modal
+        onCancel={() => setAddEditModalVisibility(false)}
+        visible={addEditModalVisibility}
+        title='Add New Item'
+        footer={false}
+      >
+        <Form layout='vertical' onFinish={onFinish}>
+          <Form.Item name='name' label='Name'>
+            <Input />
+          </Form.Item>
+          <Form.Item name='price' label='Price'>
+            <Input />
+          </Form.Item>
+          <Form.Item name='image' label='Image Url'>
+            <Input />
+          </Form.Item>
+          <Form.Item name='category' label='Category'>
+            <Select>
+              <Select.Option value='fruits'>Fruits</Select.Option>
+              <Select.Option value='vegetables'>Vegetables</Select.Option>
+              <Select.Option value='meat'>Meat</Select.Option>
+            </Select>
+          </Form.Item>
+          <div className='d-flex justify-content-end'>
+            <Button htmlType='submit' className='default-btn'>
+              SAVE
+            </Button>
+          </div>
+        </Form>
+      </Modal>
     </DefaultLayout>
   )
 }

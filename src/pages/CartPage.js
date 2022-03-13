@@ -75,7 +75,7 @@ const CartPage = () => {
   ]
   return (
     <DefaultLayout>
-      <Table columns={columns} dataSource={cartItems} bordered />
+      <Table columns={columns} dataSource={cartItems} rowKey='name' bordered />
     </DefaultLayout>
   )
 }
