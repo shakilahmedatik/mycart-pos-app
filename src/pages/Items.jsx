@@ -7,6 +7,7 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 
 const Items = () => {
   const [addEditModalVisibility, setAddEditModalVisibility] = useState(false)
+  const [editingItem, setEditingItem] = useState(null)
   const dispatch = useDispatch()
   const [items, setItems] = useState([])
   const getAllItems = () => {
@@ -51,8 +52,14 @@ const Items = () => {
       dataIndex: '_id',
       render: (id, record) => (
         <div className='d-flex'>
+          <EditOutlined
+            className='mx-2'
+            onClick={() => {
+              setEditingItem(record)
+              setAddEditModalVisibility(true)
+            }}
+          />
           <DeleteOutlined className='mx-2' />
-          <EditOutlined className='mx-2' />
         </div>
       ),
     },
@@ -60,19 +67,36 @@ const Items = () => {
 
   const onFinish = values => {
     dispatch({ type: 'showLoading' })
-    axios
-      .post('/api/items/add-items', values)
-      .then(response => {
-        dispatch({ type: 'hideLoading' })
-        console.log(response)
-        message.success(response.data)
-        getAllItems()
-      })
-      .catch(err => {
-        dispatch({ type: 'hideLoading' })
-        console.log(err)
-        message.error(err.message)
-      })
+    if (editingItem === null) {
+      axios
+        .post('/api/items/add-items', values)
+        .then(response => {
+          dispatch({ type: 'hideLoading' })
+          console.log(response)
+          message.success(response.data)
+          getAllItems()
+        })
+        .catch(err => {
+          dispatch({ type: 'hideLoading' })
+          console.log(err)
+          message.error(err.message)
+        })
+    } else {
+      axios
+        .put('/api/items/edit-item', { ...values, itemId: editingItem._id })
+        .then(response => {
+          dispatch({ type: 'hideLoading' })
+          console.log(response)
+          message.success(response.data)
+          setEditingItem(null)
+          getAllItems()
+        })
+        .catch(err => {
+          dispatch({ type: 'hideLoading' })
+          console.log(err)
+          message.error(err.message)
+        })
+    }
   }
   return (
     <DefaultLayout>
@@ -86,36 +110,45 @@ const Items = () => {
         </Button>
       </div>
       <Table columns={columns} dataSource={items} rowKey='name' bordered />
-      <Modal
-        onCancel={() => setAddEditModalVisibility(false)}
-        visible={addEditModalVisibility}
-        title='Add New Item'
-        footer={false}
-      >
-        <Form layout='vertical' onFinish={onFinish}>
-          <Form.Item name='name' label='Name'>
-            <Input />
-          </Form.Item>
-          <Form.Item name='price' label='Price'>
-            <Input />
-          </Form.Item>
-          <Form.Item name='image' label='Image Url'>
-            <Input />
-          </Form.Item>
-          <Form.Item name='category' label='Category'>
-            <Select>
-              <Select.Option value='fruits'>Fruits</Select.Option>
-              <Select.Option value='vegetables'>Vegetables</Select.Option>
-              <Select.Option value='meat'>Meat</Select.Option>
-            </Select>
-          </Form.Item>
-          <div className='d-flex justify-content-end'>
-            <Button htmlType='submit' className='default-btn'>
-              SAVE
-            </Button>
-          </div>
-        </Form>
-      </Modal>
+      {addEditModalVisibility && (
+        <Modal
+          onCancel={() => {
+            setAddEditModalVisibility(false)
+            setEditingItem(null)
+          }}
+          visible={addEditModalVisibility}
+          title={`${editingItem !== null ? 'Edit Item' : 'Add New Item'}`}
+          footer={false}
+        >
+          <Form
+            initialValues={editingItem}
+            layout='vertical'
+            onFinish={onFinish}
+          >
+            <Form.Item name='name' label='Name'>
+              <Input />
+            </Form.Item>
+            <Form.Item name='price' label='Price'>
+              <Input />
+            </Form.Item>
+            <Form.Item name='image' label='Image Url'>
+              <Input />
+            </Form.Item>
+            <Form.Item name='category' label='Category'>
+              <Select>
+                <Select.Option value='fruits'>Fruits</Select.Option>
+                <Select.Option value='vegetables'>Vegetables</Select.Option>
+                <Select.Option value='meat'>Meat</Select.Option>
+              </Select>
+            </Form.Item>
+            <div className='d-flex justify-content-end'>
+              <Button htmlType='submit' className='default-btn'>
+                SAVE
+              </Button>
+            </div>
+          </Form>
+        </Modal>
+      )}
     </DefaultLayout>
   )
 }
