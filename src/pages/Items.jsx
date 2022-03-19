@@ -89,6 +89,7 @@ const Items = () => {
           console.log(response)
           message.success(response.data)
           setEditingItem(null)
+          setAddEditModalVisibility(false)
           getAllItems()
         })
         .catch(err => {
