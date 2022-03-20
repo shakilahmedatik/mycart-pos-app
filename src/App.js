@@ -5,6 +5,7 @@ import CartPage from './pages/CartPage'
 import Homepage from './pages/Homepage'
 import Customers from './pages/Customers'
 import Items from './pages/Items'
+import Register from './pages/Register'
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path='/bills' element={<Bills />} />
           <Route path='/customers' element={<Customers />} />
           <Route path='/cart' element={<CartPage />} />
+          <Route path='/register' element={<Register />} />
         </Routes>
       </BrowserRouter>
     </div>
