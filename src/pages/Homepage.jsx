@@ -7,7 +7,7 @@ import '../assets/styles/items.css'
 import { useDispatch } from 'react-redux'
 
 const Homepage = () => {
-  const [selectedCategory, setSelectedCategory] = useState('fruits')
+  const [selectedCategory, setSelectedCategory] = useState(null)
   const categories = [
     {
       name: 'fruits',
@@ -43,13 +43,20 @@ const Homepage = () => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => getAllItems(), [])
+  console.log(selectedCategory)
   return (
     <div>
       <DefaultLayout>
         <div className='d-flex'>
           {categories.map(category => {
             return (
-              <div className='d-flex category'>
+              <div
+                key={category.name}
+                onClick={() => setSelectedCategory(category.name)}
+                className={`d-flex category ${
+                  selectedCategory === category.name && 'selected-category'
+                }`}
+              >
                 <h4>{category.name}</h4>
                 <img
                   src={category.imageURL}
@@ -62,13 +69,17 @@ const Homepage = () => {
           })}
         </div>
         <Row gutter={20}>
-          {items.map((item, i) => {
-            return (
-              <Col key={i} xs={24} lg={8} xl={6} md={12} sm={12}>
-                <Item item={item} />{' '}
-              </Col>
+          {items
+            .filter(i =>
+              selectedCategory ? i.category === selectedCategory : true
             )
-          })}
+            .map((item, i) => {
+              return (
+                <Col key={i} xs={24} lg={8} xl={6} md={12} sm={12}>
+                  <Item item={item} />{' '}
+                </Col>
+              )
+            })}
         </Row>
       </DefaultLayout>
     </div>
