@@ -70,5 +70,6 @@
 }
 
 .ant-layout-content {
-  min-height: 86.5vh !important;
+  height: 86.5vh !important;
+  overflow-y: scroll;
 }

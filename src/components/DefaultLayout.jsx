@@ -27,22 +27,9 @@ const DefaultLayout = ({ children }) => {
   const toggle = () => setISCollapsed(!isCollapsed)
   return (
     <Layout hasSider>
-      <Sider
-        style={{
-          overflow: 'auto',
-          height: '100vh',
-          position: 'fixed',
-          left: 15,
-          top: 13,
-          bottom: 0,
-          transition: 'all 0.3s ease-out',
-        }}
-        trigger={null}
-        collapsible
-        collapsed={isCollapsed}
-      >
+      <Sider trigger={null} collapsible collapsed={isCollapsed}>
         <div className='logo'>
-          <h3>Cart POS</h3>
+          <h3> {isCollapsed ? 'MCP' : 'MY CART POS'}</h3>
         </div>
         <Menu
           theme='dark'
@@ -66,14 +53,7 @@ const DefaultLayout = ({ children }) => {
           </Menu.Item>
         </Menu>
       </Sider>
-      <Layout
-        className='site-layout'
-        style={
-          isCollapsed
-            ? { marginLeft: 80, transition: 'all 0.3s ease-out' }
-            : { marginLeft: 200, transition: 'all 0.3s ease-out' }
-        }
-      >
+      <Layout className='site-layout'>
         <Header className='site-layout-background' style={{ padding: 10 }}>
           {React.createElement(
             isCollapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
