@@ -45,3 +45,18 @@ input:focus {
   box-shadow: none !important;
   outline: none !important;
 }
+
+.category {
+  border: 2px solid rgb(228, 225, 225);
+  margin-right: 50px;
+  align-items: center;
+  padding-left: 25px;
+  border-radius: 10px;
+}
+.category h4 {
+  margin-right: 25px;
+}
+.category img {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
