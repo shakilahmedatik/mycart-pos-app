@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Form, Input, message, Row, Col } from 'antd'
 import '../assets/styles/authentication.css'
+import { Link } from 'react-router-dom'
 
 const Register = () => {
   const onFinish = value => {
@@ -11,6 +12,13 @@ const Register = () => {
       <Row>
         <Col lg={8} xs={22}>
           <Form layout='vertical' onFinish={onFinish}>
+            <div className='text-center'>
+              <h1>
+                <b>MyCart POS</b>
+              </h1>
+              <hr />
+              <h3>Register</h3>
+            </div>
             <Form.Item name='name' label='Name'>
               <Input />
             </Form.Item>
@@ -23,8 +31,12 @@ const Register = () => {
 
             <div className='d-flex justify-content-end'>
               <Button htmlType='submit' className='default-btn'>
-                SAVE
+                Register
               </Button>
+            </div>
+            <br />
+            <div className='d-flex justify-content-end'>
+              <Link to='/login'>Already Registered? Click Here To Login</Link>
             </div>
           </Form>
         </Col>
