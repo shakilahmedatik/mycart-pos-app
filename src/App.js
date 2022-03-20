@@ -6,6 +6,7 @@ import Homepage from './pages/Homepage'
 import Customers from './pages/Customers'
 import Items from './pages/Items'
 import Register from './pages/Register'
+import Login from './pages/Login'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path='/customers' element={<Customers />} />
           <Route path='/cart' element={<CartPage />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>
