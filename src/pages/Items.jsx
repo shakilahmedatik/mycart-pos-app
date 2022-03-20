@@ -59,7 +59,7 @@ const Items = () => {
               setAddEditModalVisibility(true)
             }}
           />
-          <DeleteOutlined className='mx-2' />
+          <DeleteOutlined className='mx-2' onClick={() => deleteItem(record)} />
         </div>
       ),
     },
@@ -74,6 +74,7 @@ const Items = () => {
           dispatch({ type: 'hideLoading' })
           console.log(response)
           message.success(response.data)
+          setAddEditModalVisibility(false)
           getAllItems()
         })
         .catch(err => {
@@ -99,6 +100,23 @@ const Items = () => {
         })
     }
   }
+  const deleteItem = record => {
+    console.log(record._id)
+    dispatch({ type: 'showLoading' })
+    axios
+      .delete(`/api/items/delete-item/${record._id}`)
+      .then(response => {
+        dispatch({ type: 'hideLoading' })
+        console.log(response)
+        message.success(response.data)
+        getAllItems()
+      })
+      .catch(err => {
+        dispatch({ type: 'hideLoading' })
+        console.log(err)
+        message.error(err.message)
+      })
+  }
   return (
     <DefaultLayout>
       <div className='d-flex justify-content-between'>
@@ -110,7 +128,7 @@ const Items = () => {
           Add item
         </Button>
       </div>
-      <Table columns={columns} dataSource={items} rowKey='name' bordered />
+      <Table columns={columns} dataSource={items} rowKey='_id' bordered />
       {addEditModalVisibility && (
         <Modal
           onCancel={() => {
