@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 const Register = () => {
   const onFinish = value => {
     axios
-      .post('/api/user/register', value)
+      .post('/api/user/login', value)
       .then(response => {
         console.log(response)
         message.success(response.data)
@@ -30,8 +30,8 @@ const Register = () => {
               <h3>Login</h3>
             </div>
 
-            <Form.Item name='email' label='Email'>
-              <Input type='email' />
+            <Form.Item name='userId' label='User ID'>
+              <Input />
             </Form.Item>
             <Form.Item name='password' label='Password'>
               <Input type='password' />
