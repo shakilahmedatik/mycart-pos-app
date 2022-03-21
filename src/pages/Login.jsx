@@ -1,11 +1,21 @@
 import React from 'react'
 import { Button, Form, Input, message, Row, Col } from 'antd'
 import '../assets/styles/authentication.css'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 const Register = () => {
   const onFinish = value => {
-    console.log(value)
+    axios
+      .post('/api/user/register', value)
+      .then(response => {
+        console.log(response)
+        message.success(response.data)
+      })
+      .catch(err => {
+        console.log(err.response.data.message)
+        message.error(err.response.data.message)
+      })
   }
   return (
     <div className='authentication'>
