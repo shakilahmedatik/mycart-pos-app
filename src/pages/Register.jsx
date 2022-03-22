@@ -4,6 +4,7 @@ import { Button, Form, Input, message, Row, Col } from 'antd'
 import '../assets/styles/authentication.css'
 import { Link } from 'react-router-dom'
 
+// Registration
 const Register = () => {
   const onFinish = value => {
     axios
