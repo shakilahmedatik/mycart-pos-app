@@ -13,8 +13,8 @@ const Register = () => {
         message.success(response.data)
       })
       .catch(err => {
-        console.log(err.response.data.message)
-        message.error(err.response.data.message)
+        console.log(err.response.data)
+        message.error(err.response.data)
       })
   }
   return (
