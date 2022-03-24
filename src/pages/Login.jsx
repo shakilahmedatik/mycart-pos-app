@@ -11,6 +11,7 @@ const Register = () => {
       .then(response => {
         console.log(response)
         message.success(response.data)
+        localStorage.setItem('pos-user', JSON.stringify(response.data))
       })
       .catch(err => {
         console.log(err.response.data)
