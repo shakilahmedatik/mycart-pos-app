@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Form, Input, message, Row, Col } from 'antd'
 import '../assets/styles/authentication.css'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Register = () => {
+  const navigate = useNavigate()
   const onFinish = value => {
     axios
       .post('/api/user/login', value)
@@ -12,12 +13,19 @@ const Register = () => {
         console.log(response)
         message.success(response.data)
         localStorage.setItem('pos-user', JSON.stringify(response.data))
+        navigate('/home')
       })
       .catch(err => {
         console.log(err.response.data)
         message.error(err.response.data)
       })
   }
+  useEffect(() => {
+    if (localStorage.getItem('pos-user')) {
+      navigate('/home')
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <div className='authentication'>
       <Row>
