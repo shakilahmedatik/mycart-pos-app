@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Bills from './pages/Bills'
 import CartPage from './pages/CartPage'
 import Homepage from './pages/Homepage'
@@ -27,3 +27,11 @@ const App = () => {
 }
 
 export default App
+
+export function ProtectedRoute({ children }) {
+  if (localStorage.getItem('pos-user')) {
+    return children
+  } else {
+    return <Navigate to='/login' />
+  }
+}
