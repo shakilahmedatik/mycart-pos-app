@@ -69,3 +69,14 @@ input:focus {
 .subtotal h2 {
   color: #077979;
 }
+
+.subtotal button {
+  margin-top: 10px;
+  color: white !important;
+  background-color: #0a7979;
+}
+
+.subtotal button:hover {
+  color: #0a7979 !important;
+  background-color: #fff;
+}

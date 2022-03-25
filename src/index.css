@@ -2,3 +2,18 @@
 body {
   font-family: 'Poppins', sans-serif !important;
 }
+/* 
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #bce4e4;
+}
+::-webkit-scrollbar-thumb {
+  background: #077979;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0b4747;
+} */

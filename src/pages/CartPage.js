@@ -1,4 +1,4 @@
-import { Table } from 'antd'
+import { Table, Button, Modal, Form, Input, Select, message } from 'antd'
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import DefaultLayout from '../components/DefaultLayout'
@@ -18,6 +18,7 @@ const CartPage = () => {
     })
   }
   const [subTotal, setSubTotal] = useState(0)
+  const [billChargeModal, setBillChargeModal] = useState(false)
   useEffect(() => {
     let temp = 0
     cartItems.forEach(item => {
@@ -25,6 +26,9 @@ const CartPage = () => {
     })
     setSubTotal(temp)
   }, [cartItems])
+  const onFinish = () => {
+    // Code goes here!!!!
+  }
   const decreaseQuantity = record => {
     if (record.quantity !== 1) {
       dispatch({
@@ -85,13 +89,43 @@ const CartPage = () => {
     <DefaultLayout>
       <Table columns={columns} dataSource={cartItems} rowKey='name' bordered />
       <hr />
-      <div className='d-flex justify-content-end'>
-        <div className='subtotal'>
+      <div className='d-flex subtotal flex-column justify-content-end align-items-end'>
+        <div>
           <h2>
             SubTotal: <b>{subTotal}$</b>
           </h2>
         </div>
+        <Button type='primary' onClick={() => setBillChargeModal(true)}>
+          CHARGE BILL
+        </Button>
       </div>
+      <Modal
+        title='CHARGE BILL'
+        visible={billChargeModal}
+        footer={null}
+        onCancel={() => setBillChargeModal(false)}
+      >
+        <Form layout='vertical' onFinish={onFinish}>
+          <Form.Item name='customerName' label='Customer Name'>
+            <Input />
+          </Form.Item>
+          <Form.Item name='phoneNumber' label='Phone Number'>
+            <Input />
+          </Form.Item>
+
+          <Form.Item name='paymentMode' label='Payment Mode'>
+            <Select>
+              <Select.Option value='cash'>Cash</Select.Option>
+              <Select.Option value='card'>Card</Select.Option>
+            </Select>
+          </Form.Item>
+          <div className='d-flex justify-content-end'>
+            <Button htmlType='submit' className='default-btn'>
+              GENERATE BILL
+            </Button>
+          </div>
+        </Form>
+      </Modal>
     </DefaultLayout>
   )
 }
