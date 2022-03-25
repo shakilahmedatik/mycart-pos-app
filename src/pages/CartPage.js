@@ -26,8 +26,16 @@ const CartPage = () => {
     })
     setSubTotal(temp)
   }, [cartItems])
-  const onFinish = () => {
-    // Code goes here!!!!
+
+  const onFinish = values => {
+    const reqObj = {
+      ...values,
+      subTotal,
+      tax: ((subTotal * 10) / 100).toFixed(2),
+      total: subTotal + (subTotal * 10) / 100,
+      userId: JSON.parse(localStorage.getItem('pos-user'))._id,
+    }
+    console.log(reqObj)
   }
   const decreaseQuantity = record => {
     if (record.quantity !== 1) {

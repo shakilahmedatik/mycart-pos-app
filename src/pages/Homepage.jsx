@@ -43,7 +43,7 @@ const Homepage = () => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => getAllItems(), [])
-  console.log(selectedCategory)
+
   return (
     <div>
       <DefaultLayout>
