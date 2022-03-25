@@ -19,7 +19,11 @@ export const rootReducer = (state = initialState, action) => {
             : item
         ),
       }
-
+    case 'emptyCart':
+      return {
+        ...state,
+        cartItems: [],
+      }
     case 'deleteFromCart':
       return {
         ...state,

@@ -2,6 +2,7 @@ import { Table, Button, Modal, Form, Input, Select, message } from 'antd'
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import DefaultLayout from '../components/DefaultLayout'
+import axios from 'axios'
 import {
   DeleteOutlined,
   PlusCircleOutlined,
@@ -36,7 +37,21 @@ const CartPage = () => {
       total: Number(subTotal + (subTotal * 10) / 100),
       userId: JSON.parse(localStorage.getItem('pos-user'))._id,
     }
-    console.log(reqObj)
+    axios
+      .post('/api/bills/charge-bill', reqObj)
+      .then(response => {
+        dispatch({ type: 'hideLoading' })
+        console.log(response)
+        message.success(response.data)
+        localStorage.removeItem('cartItems')
+        dispatch({ type: 'emptyCart' })
+        setBillChargeModal(false)
+      })
+      .catch(err => {
+        dispatch({ type: 'hideLoading' })
+        console.log(err)
+        message.error(err.message)
+      })
   }
   const decreaseQuantity = record => {
     if (record.quantity !== 1) {
