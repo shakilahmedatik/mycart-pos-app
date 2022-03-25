@@ -119,6 +119,18 @@ const CartPage = () => {
               <Select.Option value='card'>Card</Select.Option>
             </Select>
           </Form.Item>
+          <div className='charge-bill-amount'>
+            <h5>
+              Sub Total: <b>{subTotal}$</b>
+            </h5>
+            <h5>
+              Tax: <b>{((subTotal * 10) / 100).toFixed(2)}$</b>
+            </h5>
+            <hr />
+            <h3>
+              Total: <b>{subTotal + (subTotal * 10) / 100}$</b>
+            </h3>
+          </div>
           <div className='d-flex justify-content-end'>
             <Button htmlType='submit' className='default-btn'>
               GENERATE BILL

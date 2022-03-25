@@ -80,3 +80,7 @@ input:focus {
   color: #0a7979 !important;
   background-color: #fff;
 }
+
+.charge-bill-amount h3 {
+  color: #077979;
+}
