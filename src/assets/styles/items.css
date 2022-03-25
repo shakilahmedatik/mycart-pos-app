@@ -65,3 +65,7 @@ input:focus {
 .selected-category {
   border: 2px solid #0a7979 !important;
 }
+
+.subtotal h2 {
+  color: #077979;
+}
