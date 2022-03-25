@@ -32,8 +32,8 @@ const CartPage = () => {
       ...values,
       cartItems,
       subTotal,
-      tax: ((subTotal * 10) / 100).toFixed(2),
-      total: subTotal + (subTotal * 10) / 100,
+      tax: Number(((subTotal * 10) / 100).toFixed(2)),
+      total: Number(subTotal + (subTotal * 10) / 100),
       userId: JSON.parse(localStorage.getItem('pos-user'))._id,
     }
     console.log(reqObj)
