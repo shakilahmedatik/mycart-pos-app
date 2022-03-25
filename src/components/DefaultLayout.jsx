@@ -28,9 +28,11 @@ const DefaultLayout = ({ children }) => {
   return (
     <Layout hasSider>
       <Sider trigger={null} collapsible collapsed={isCollapsed}>
-        <div className='logo'>
-          <h3> {isCollapsed ? 'MCP' : 'MY CART POS'}</h3>
-        </div>
+        <Link to='/'>
+          <div className='logo'>
+            <h3> {isCollapsed ? 'MCP' : 'MY CART POS'}</h3>
+          </div>
+        </Link>
         <Menu
           theme='dark'
           mode='inline'
