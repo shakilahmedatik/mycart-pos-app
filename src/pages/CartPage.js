@@ -30,6 +30,7 @@ const CartPage = () => {
   const onFinish = values => {
     const reqObj = {
       ...values,
+      cartItems,
       subTotal,
       tax: ((subTotal * 10) / 100).toFixed(2),
       total: subTotal + (subTotal * 10) / 100,
