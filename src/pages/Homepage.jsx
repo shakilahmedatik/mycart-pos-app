@@ -7,6 +7,7 @@ import '../assets/styles/items.css'
 import { useDispatch } from 'react-redux'
 
 const Homepage = () => {
+  // Manage Category Data
   const [selectedCategory, setSelectedCategory] = useState(null)
   const categories = [
     {
