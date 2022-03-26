@@ -17,12 +17,14 @@ import { useSelector } from 'react-redux'
 const { Header, Sider, Content } = Layout
 
 const DefaultLayout = ({ children }) => {
+  // State
   const { cartItems, loading } = useSelector(state => state.rootReducer)
   const navigate = useNavigate()
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems))
   }, [cartItems])
 
+  // Handle sidebar collapse state
   const [isCollapsed, setISCollapsed] = useState(false)
   const toggle = () => setISCollapsed(!isCollapsed)
   return (
