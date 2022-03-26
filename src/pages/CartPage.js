@@ -10,6 +10,7 @@ import {
 } from '@ant-design/icons'
 
 const CartPage = () => {
+  // Handle cart-item using redux
   const dispatch = useDispatch()
   const { cartItems } = useSelector(state => state.rootReducer)
   const increaseQuantity = record => {
