@@ -13,7 +13,7 @@ const Bills = () => {
   const getAllBills = () => {
     dispatch({ type: 'showLoading' })
     axios
-      .get('/api/items/get-all-bills')
+      .get('/api/bills/get-all-bills')
       .then(response => {
         dispatch({ type: 'hideLoading' })
         setBills(response.data)
@@ -55,7 +55,10 @@ const Bills = () => {
   ]
   return (
     <DefaultLayout>
-      <h1>Bills Page</h1>
+      <div className='d-flex justify-content-between'>
+        <h3>Bills</h3>
+      </div>
+      <Table columns={columns} dataSource={bills} rowKey='_id' bordered />
     </DefaultLayout>
   )
 }
