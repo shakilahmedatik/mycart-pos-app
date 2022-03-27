@@ -26,7 +26,33 @@ const Bills = () => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => getAllBills(), [])
-
+  const columns = [
+    {
+      title: 'ID',
+      dataIndex: '_id',
+    },
+    {
+      title: 'Customer',
+      dataIndex: 'customerName',
+    },
+    {
+      title: 'SubTotal',
+      dataIndex: 'subTotal',
+    },
+    {
+      title: 'Tax',
+      dataIndex: 'tax',
+    },
+    {
+      title: 'Total',
+      dataIndex: 'total',
+    },
+    {
+      title: 'Actions',
+      dataIndex: '_id',
+      render: (id, record) => <EyeOutlined onClick={() => {}} />,
+    },
+  ]
   return (
     <DefaultLayout>
       <h1>Bills Page</h1>
