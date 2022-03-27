@@ -1,0 +1,10 @@
+.bill-header {
+  border-bottom: 2px dashed rgb(134, 123, 123);
+}
+.bill-model h1 {
+  font-size: 30px;
+}
+.bill-model p {
+  margin-top: 0;
+  margin-bottom: 0 !important;
+}
