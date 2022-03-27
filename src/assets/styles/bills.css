@@ -11,3 +11,14 @@
 .dotted-border {
   border-bottom: 2px dotted rgb(134, 123, 123);
 }
+
+.print-btn button {
+  margin-top: 10px;
+  color: white !important;
+  background-color: #0a7979;
+}
+
+.print-btn button:hover {
+  color: #0a7979 !important;
+  background-color: #fff;
+}

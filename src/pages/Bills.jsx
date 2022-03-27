@@ -150,7 +150,7 @@ const Bills = () => {
               </h2>
             </div>
           </div>
-          <div className='d-flex justify-content-end'>
+          <div className='d-flex print-btn justify-content-end'>
             <Button onClick={handlePrint} type='primary'>
               Print Bill
             </Button>
