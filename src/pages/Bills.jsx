@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { Table, Button, Modal, Form, Input, Select, message } from 'antd'
 import DefaultLayout from '../components/DefaultLayout'
 import { EyeOutlined } from '@ant-design/icons'
 import '../assets/styles/bills.css'
+import { useReactToPrint } from 'react-to-print'
 
 const Bills = () => {
+  const componentRef = useRef()
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  })
   const [printBillModalVisibility, setPrintBillModalVisibility] =
     useState(false)
   const [selectedBill, setSelectedBill] = useState(null)
@@ -99,7 +104,7 @@ const Bills = () => {
           title='Bill Details'
           footer={false}
         >
-          <div className='bill-model'>
+          <div className='bill-model p-4' ref={componentRef}>
             <div className='d-flex justify-content-between bill-header pb-2'>
               <div>
                 <h1>
@@ -146,7 +151,9 @@ const Bills = () => {
             </div>
           </div>
           <div className='d-flex justify-content-end'>
-            <Button type='primary'>Print Bill</Button>
+            <Button onClick={handlePrint} type='primary'>
+              Print Bill
+            </Button>
           </div>
         </Modal>
       )}
