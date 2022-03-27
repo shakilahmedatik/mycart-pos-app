@@ -63,6 +63,28 @@ const Bills = () => {
       ),
     },
   ]
+  const cartColumns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+    },
+    {
+      title: 'Image',
+      dataIndex: 'image',
+      render: (image, record) => (
+        <img src={image} height='60' width='60' alt='productImage'></img>
+      ),
+    },
+    {
+      title: 'Price',
+      dataIndex: 'price',
+    },
+    {
+      title: 'Quantity',
+      dataIndex: '_id',
+      render: (id, record) => <b>{record.quantity}</b>,
+    },
+  ]
   return (
     <DefaultLayout>
       <div className='d-flex justify-content-between'>
