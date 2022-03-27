@@ -145,6 +145,9 @@ const Bills = () => {
               </h2>
             </div>
           </div>
+          <div className='d-flex justify-content-end'>
+            <Button type='primary'>Print Bill</Button>
+          </div>
         </Modal>
       )}
     </DefaultLayout>
