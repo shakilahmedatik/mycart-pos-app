@@ -69,13 +69,6 @@ const Bills = () => {
       dataIndex: 'name',
     },
     {
-      title: 'Image',
-      dataIndex: 'image',
-      render: (image, record) => (
-        <img src={image} height='60' width='60' alt='productImage'></img>
-      ),
-    },
-    {
       title: 'Price',
       dataIndex: 'price',
     },
@@ -83,6 +76,11 @@ const Bills = () => {
       title: 'Quantity',
       dataIndex: '_id',
       render: (id, record) => <b>{record.quantity}</b>,
+    },
+    {
+      title: 'Total Fare',
+      dataIndex: '_id',
+      render: (id, record) => <b>{record.quantity * record.price}</b>,
     },
   ]
   return (
@@ -126,6 +124,12 @@ const Bills = () => {
                 {selectedBill.createdAt.toString().substring(0, 10)}
               </p>
             </div>
+            <Table
+              columns={cartColumns}
+              dataSource={selectedBill.cartItems}
+              rowKey='_id'
+              bordered
+            />
           </div>
         </Modal>
       )}
