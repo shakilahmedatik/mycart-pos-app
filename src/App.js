@@ -37,7 +37,14 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route path='/bills' element={<Bills />} />
+          <Route
+            path='/bills'
+            element={
+              <ProtectedRoute>
+                <Bills />
+              </ProtectedRoute>
+            }
+          />
           <Route path='/customers' element={<Customers />} />
           <Route
             path='/cart'
