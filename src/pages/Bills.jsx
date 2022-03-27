@@ -129,7 +129,21 @@ const Bills = () => {
               dataSource={selectedBill.cartItems}
               rowKey='_id'
               bordered
+              pagination={false}
             />
+            <div className='dotted-border my-2'>
+              <p>
+                <b>SUB TOTAL</b> : {selectedBill.subTotal}
+              </p>
+              <p>
+                <b>TAX</b> : {selectedBill.tax}
+              </p>
+            </div>
+            <div className='my-2'>
+              <h2>
+                <b>GRAND TOTAL</b> : {selectedBill.total}
+              </h2>
+            </div>
           </div>
         </Modal>
       )}
