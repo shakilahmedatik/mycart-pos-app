@@ -6,7 +6,8 @@ import DefaultLayout from '../components/DefaultLayout'
 import { EyeOutlined } from '@ant-design/icons'
 
 const Bills = () => {
-  const [addEditModalVisibility, setAddEditModalVisibility] = useState(false)
+  const [printBillModalVisibility, setPrintBillModalVisibility] =
+    useState(false)
 
   const dispatch = useDispatch()
   const [bills, setBills] = useState([])
@@ -50,7 +51,13 @@ const Bills = () => {
     {
       title: 'Actions',
       dataIndex: '_id',
-      render: (id, record) => <EyeOutlined onClick={() => {}} />,
+      render: (id, record) => (
+        <EyeOutlined
+          onClick={() => {
+            setPrintBillModalVisibility(true)
+          }}
+        />
+      ),
     },
   ]
   return (
@@ -59,6 +66,16 @@ const Bills = () => {
         <h3>Bills</h3>
       </div>
       <Table columns={columns} dataSource={bills} rowKey='_id' bordered />
+      {printBillModalVisibility && (
+        <Modal
+          onCancel={() => {
+            setPrintBillModalVisibility(false)
+          }}
+          visible={printBillModalVisibility}
+          title='Bill Details'
+          footer={false}
+        ></Modal>
+      )}
     </DefaultLayout>
   )
 }
