@@ -36,36 +36,21 @@ const Customers = () => {
   useEffect(() => getAllBills(), [])
   const columns = [
     {
-      title: 'ID',
-      dataIndex: '_id',
+      title: 'Customer',
+      dataIndex: 'customerName',
     },
     {
       title: 'Customer',
       dataIndex: 'customerName',
     },
     {
-      title: 'SubTotal',
-      dataIndex: 'subTotal',
+      title: 'Phone Number',
+      dataIndex: 'phoneNumber',
     },
     {
-      title: 'Tax',
-      dataIndex: 'tax',
-    },
-    {
-      title: 'Total',
-      dataIndex: 'total',
-    },
-    {
-      title: 'Actions',
-      dataIndex: '_id',
-      render: (id, record) => (
-        <EyeOutlined
-          onClick={() => {
-            setSelectedBill(record)
-            setPrintBillModalVisibility(true)
-          }}
-        />
-      ),
+      title: 'Created On',
+      dataIndex: 'createdAt',
+      render: value => <span>{value.toString().substring(0, 10)}</span>,
     },
   ]
 
