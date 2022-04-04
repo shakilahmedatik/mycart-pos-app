@@ -75,69 +75,6 @@ const Customers = () => {
         <h3>Customers</h3>
       </div>
       <Table columns={columns} dataSource={bills} rowKey='_id' bordered />
-      {printBillModalVisibility && (
-        <Modal
-          width={800}
-          onCancel={() => {
-            setPrintBillModalVisibility(false)
-          }}
-          visible={printBillModalVisibility}
-          title='Bill Details'
-          footer={false}
-        >
-          <div className='bill-model p-4' ref={componentRef}>
-            <div className='d-flex justify-content-between bill-header pb-2'>
-              <div>
-                <h1>
-                  <b>Walmart</b>
-                </h1>
-              </div>
-              <div>
-                <p>17/09 Yangzhou</p>
-                <p>Jiangsu</p>
-                <p>China</p>
-              </div>
-            </div>
-            <div className='bill-customer-details mt-2'>
-              <p>
-                <b>Name</b> : {selectedBill.customerName}
-              </p>
-              <p>
-                <b>Phone Number</b> : {selectedBill.phoneNumber}
-              </p>
-              <p>
-                <b>Date</b> :{' '}
-                {selectedBill.createdAt.toString().substring(0, 10)}
-              </p>
-            </div>
-            <Table
-              columns={cartColumns}
-              dataSource={selectedBill.cartItems}
-              rowKey='_id'
-              bordered
-              pagination={false}
-            />
-            <div className='dotted-border my-2'>
-              <p>
-                <b>SUB TOTAL</b> : {selectedBill.subTotal}
-              </p>
-              <p>
-                <b>TAX</b> : {selectedBill.tax}
-              </p>
-            </div>
-            <div className='my-2'>
-              <h2>
-                <b>GRAND TOTAL</b> : {selectedBill.total}
-              </h2>
-            </div>
-          </div>
-          <div className='d-flex print-btn justify-content-end'>
-            <Button onClick={handlePrint} type='primary'>
-              Print Bill
-            </Button>
-          </div>
-        </Modal>
-      )}
     </DefaultLayout>
   )
 }
