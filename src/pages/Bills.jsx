@@ -24,7 +24,9 @@ const Bills = () => {
       .get('/api/bills/get-all-bills')
       .then(response => {
         dispatch({ type: 'hideLoading' })
-        setBills(response.data)
+        const data = response.data
+        data.reverse()
+        setBills(data)
       })
       .catch(err => {
         dispatch({ type: 'hideLoading' })
