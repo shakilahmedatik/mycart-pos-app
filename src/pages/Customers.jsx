@@ -1,21 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
-import { Table, Button, Modal, Form, Input, Select, message } from 'antd'
+import { Table } from 'antd'
 import DefaultLayout from '../components/DefaultLayout'
-import { EyeOutlined } from '@ant-design/icons'
-import '../assets/styles/bills.css'
-import { useReactToPrint } from 'react-to-print'
 
 const Customers = () => {
-  const componentRef = useRef()
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  })
-  const [printBillModalVisibility, setPrintBillModalVisibility] =
-    useState(false)
-  const [selectedBill, setSelectedBill] = useState(null)
-
   const dispatch = useDispatch()
   const [bills, setBills] = useState([])
   const getAllBills = () => {
