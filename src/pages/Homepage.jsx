@@ -48,7 +48,7 @@ const Homepage = () => {
   return (
     <div>
       <DefaultLayout>
-        <div className='d-flex'>
+        <div className='d-flex categories pb-2'>
           {categories.map(category => {
             return (
               <div
