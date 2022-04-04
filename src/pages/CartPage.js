@@ -8,8 +8,10 @@ import {
   PlusCircleOutlined,
   MinusCircleOutlined,
 } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
 
 const CartPage = () => {
+  const navigate = useNavigate()
   // Handle cart-item using redux
   const dispatch = useDispatch()
   const { cartItems } = useSelector(state => state.rootReducer)
@@ -44,6 +46,7 @@ const CartPage = () => {
         dispatch({ type: 'hideLoading' })
         console.log(response)
         message.success(response.data)
+        navigate('/bills')
         localStorage.removeItem('cartItems')
         dispatch({ type: 'emptyCart' })
         setBillChargeModal(false)
